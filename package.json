@@ -1,0 +1,8 @@
+{
+  "name": "neoway-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/guisteink/neoway-challenge.git",
+  "author": "Guilherme Stein <guilherme.steink@gmail.com>",
+  "license": "MIT"
+}
