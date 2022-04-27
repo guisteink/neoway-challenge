@@ -9,7 +9,7 @@
   - Rotas para uptime, e contador de consultas realizadas desde o start
 - Testes unitários/integração
 
-### UI
+### UI (SPA)
 - Consultar (Select cnpj/cpf) (Retorno da validação com possibilidade de INSERT na blocklist)
 - Consultas realizadas (tabela com as possibilidades do CRUD & INSERT na blocklist)
 - Blocklist (tabela com possibilidade de DELETE)
