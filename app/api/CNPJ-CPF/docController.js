@@ -95,7 +95,10 @@ class DocController
     {
         try {
             const { id } = req.params;
-            if (id) return await this.dao.mongodb.getById(id);
+            if (id) {
+                const findId = await this.dao.mongodb.getById(id);
+                if (findId) res.status(200).send(findId);
+            }
             else res.status(400).send("Bad request")
         } catch (error) {
             console.log(error)
@@ -110,7 +113,17 @@ class DocController
      */
     async addToBlockList(req, res)
     {
-
+        try {
+            const { type, number, status } = req.body;
+            if (type && number && status) {
+                const newBlock = await this.dao.mongodb.addToBlockList({ type, number, isValid: status ? true : false })
+                if (newBlock) res.status(201).send(newBlock)
+            }
+            else res.status(400).send("Bad request")
+        } catch (error) {
+            console.log(error)
+            res.status(500).send(error)
+        }
     }
 
     /**
@@ -120,7 +133,17 @@ class DocController
      */
     async removeFromBlockList(req, res)
     {
-
+        try {
+            const { id } = req.params;
+            if (id) {
+                const deletedDoc = await this.dao.mongodb.removeFromBlockList(id);
+                if (deletedDoc) res.status(200).send(deletedDoc);
+            }
+            else res.status(400).send("Bad request")
+        } catch (error) {
+            console.log(error)
+            res.status(500).send(error)
+        }
     }
 }
 

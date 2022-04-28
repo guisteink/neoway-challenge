@@ -8,5 +8,6 @@ const DocSchema = new mongoose.Schema({
     { timestamps: true });
 
 const DocModel = mongoose.model("Doc", DocSchema);
+const BlocklistModel = mongoose.model("Blocklist", DocSchema);
 
-module.exports = DocModel;
+module.exports = { BlocklistModel, DocModel };
