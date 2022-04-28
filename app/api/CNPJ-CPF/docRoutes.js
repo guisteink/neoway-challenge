@@ -10,5 +10,4 @@ router
     .put("/:id", (req, res) => docController.updateById(req, res))
     .delete("/:id", (req, res) => docController.deleteById(req, res))
 
-
 module.exports = router;
