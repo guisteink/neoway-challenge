@@ -19,8 +19,7 @@ class DocController
         const { type, number } = req.body;
         try {
             const response = await this.validationService.isValidDocument(type, number);
-
-            res.status(response.status).send(response.data)
+            return res.status(response.status).send(response.data)
         } catch (error) {
             console.log(error)
         }
@@ -37,12 +36,12 @@ class DocController
             const { type, number, isValid } = req.body;
             if (type && number && isValid) {
                 const newDoc = await this.dao.mongodb.insertToDb({ type, number, isValid })
-                res.status(201).send(newDoc)
+                return res.status(201).send(newDoc)
             }
-            else res.status(400).send("Bad request")
+            else return res.status(400).send("Bad request")
         } catch (error) {
             console.log(error)
-            res.status(500).send(error)
+            return res.status(500).send(error)
         }
     }
 
@@ -57,12 +56,12 @@ class DocController
             const { id } = req.params;
             if (id) {
                 const deletedDoc = await this.dao.mongodb.deleteFromDb(id);
-                res.status(200).send(deletedDoc);
+                return res.status(200).send(deletedDoc);
             }
             else res.status(400).send("Bad request")
         } catch (error) {
             console.log(error)
-            res.status(500).send(error)
+            return res.status(500).send(error)
         }
     }
 
@@ -78,12 +77,12 @@ class DocController
             const { type, number, isValid } = req.body;
             if (id && (type || number || isValid)) {
                 const updatedDoc = await this.dao.mongodb.updateById(id, { type, isValid, number })
-                res.status(200).send(updatedDoc);
+                return res.status(200).send(updatedDoc);
             }
             else res.status(400).send("Bad request")
         } catch (error) {
             console.log(error)
-            res.status(500).send(error)
+            return res.status(500).send(error)
         }
     }
 
@@ -98,12 +97,12 @@ class DocController
             const { id } = req.params;
             if (id) {
                 const findId = await this.dao.mongodb.getById(id);
-                res.status(200).send(findId);
+                return res.status(200).send(findId);
             }
-            else res.status(400).send("Bad request")
+            else return res.status(400).send("Bad request")
         } catch (error) {
             console.log(error)
-            res.status(500).send(error)
+            return res.status(500).send(error)
         }
     }
 
@@ -118,12 +117,12 @@ class DocController
             const { type, number, isValid } = req.body;
             if (type && number && isValid) {
                 const newBlock = await this.dao.mongodb.addToBlockList({ type, number, isValid })
-                res.status(201).send(newBlock)
+                return res.status(201).send(newBlock)
             }
-            else res.status(400).send("Bad request")
+            else return res.status(400).send("Bad request")
         } catch (error) {
             console.log(error)
-            res.status(500).send(error)
+            return res.status(500).send(error)
         }
     }
 
@@ -138,12 +137,12 @@ class DocController
             const { id } = req.params;
             if (id) {
                 const deletedDoc = await this.dao.mongodb.removeFromBlockList(id);
-                res.status(200).send(deletedDoc);
+                return res.status(200).send(deletedDoc);
             }
-            else res.status(400).send("Bad request")
+            else return res.status(400).send("Bad request")
         } catch (error) {
             console.log(error)
-            res.status(500).send(error)
+            return res.status(500).send(error)
         }
     }
 }
