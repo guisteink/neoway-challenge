@@ -14,7 +14,7 @@ const corsOptions = {
 }
 
 server.use(express.json());
-server.use("/api/", routes)
+server.use("/api", routes)
 server.use(cors(corsOptions));
 
 server.use(function (req, res, next)
