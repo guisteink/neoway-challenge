@@ -107,6 +107,22 @@ class DocController
     }
 
     /**
+     * Recupera todos os documentos
+     * @param {*} req 
+     * @param {*} res 
+     */
+    async getAll(req, res, next)
+    {
+        try {
+            const findAll = await this.dao.mongodb.listAll()
+            return res.status(200).send(findAll);
+        } catch (error) {
+            console.log(error)
+            return res.status(500).send(error)
+        }
+    }
+
+    /**
      * Envia o documento do banco para a collection blocklist
      * @param {*} req 
      * @param {*} res 

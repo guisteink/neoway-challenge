@@ -26,6 +26,12 @@ class DocRepository
         return findNote
     }
 
+    static async listAll()
+    {
+        const findAll = await DocModel.find({})
+        return findAll
+    }
+
     static async addToBlockList(data)
     {
         const newDoc = await BlocklistModel.create(data)
