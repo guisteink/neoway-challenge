@@ -5,7 +5,7 @@ class DocRepository
     static async insertToDb(data)
     {
         const newDoc = await DocModel.create(data)
-        return newDoc
+        return newDo
     }
 
     static async deleteFromDb(id)

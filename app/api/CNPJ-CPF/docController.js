@@ -14,7 +14,7 @@ class DocController
      * @param {*} opt 
      * @param {*} number 
      */
-    async validate(req, res)
+    async validate(req, res, next)
     {
         const { type, number } = req.body;
         try {
@@ -30,13 +30,13 @@ class DocController
      * @param {*} req 
      * @param {*} res 
      */
-    async create(req, res)
+    async create(req, res, next)
     {
         try {
-            const { type, number, status } = req.body;
-            if (type && number && status) {
-                const newDoc = await this.dao.mongodb.insertToDb({ type, number, isValid: status ? true : false })
-                if (newDoc) res.status(201).send(newDoc)
+            const { type, number, isValid } = req.body;
+            if (type && number && isValid) {
+                const newDoc = await this.dao.mongodb.insertToDb({ type, number, isValid })
+                res.status(201).send(newDoc)
             }
             else res.status(400).send("Bad request")
         } catch (error) {
@@ -50,13 +50,13 @@ class DocController
      * @param {*} req 
      * @param {*} res 
      */
-    async deleteById(req, res)
+    async deleteById(req, res, next)
     {
         try {
             const { id } = req.params;
             if (id) {
                 const deletedDoc = await this.dao.mongodb.deleteFromDb(id);
-                if (deletedDoc) res.status(200).send(deletedDoc);
+                res.status(200).send(deletedDoc);
             }
             else res.status(400).send("Bad request")
         } catch (error) {
@@ -70,14 +70,14 @@ class DocController
      * @param {*} req 
      * @param {*} res 
      */
-    async updateById(req, res)
+    async updateById(req, res, next)
     {
         try {
             const { id } = req.params;
-            const { type, number, status } = req.body;
-            if (id && (type || number || status)) {
-                const updatedDoc = await this.dao.mongodb.updateById(id, { type: type, status: status, number: number })
-                if (updatedDoc) res.status(201).send(updatedDoc);
+            const { type, number, isValid } = req.body;
+            if (id && (type || number || isValid)) {
+                const updatedDoc = await this.dao.mongodb.updateById(id, { type, isValid, number })
+                res.status(200).send(updatedDoc);
             }
             else res.status(400).send("Bad request")
         } catch (error) {
@@ -91,13 +91,13 @@ class DocController
      * @param {*} req 
      * @param {*} res 
      */
-    async getById(req, res)
+    async getById(req, res, next)
     {
         try {
             const { id } = req.params;
             if (id) {
                 const findId = await this.dao.mongodb.getById(id);
-                if (findId) res.status(200).send(findId);
+                res.status(200).send(findId);
             }
             else res.status(400).send("Bad request")
         } catch (error) {
@@ -111,13 +111,13 @@ class DocController
      * @param {*} req 
      * @param {*} res 
      */
-    async addToBlockList(req, res)
+    async addToBlockList(req, res, next)
     {
         try {
-            const { type, number, status } = req.body;
-            if (type && number && status) {
-                const newBlock = await this.dao.mongodb.addToBlockList({ type, number, isValid: status ? true : false })
-                if (newBlock) res.status(201).send(newBlock)
+            const { type, number, isValid } = req.body;
+            if (type && number && isValid) {
+                const newBlock = await this.dao.mongodb.addToBlockList({ type, number, isValid })
+                res.status(201).send(newBlock)
             }
             else res.status(400).send("Bad request")
         } catch (error) {
@@ -131,13 +131,13 @@ class DocController
      * @param {*} req 
      * @param {*} res 
      */
-    async removeFromBlockList(req, res)
+    async removeFromBlockList(req, res, next)
     {
         try {
             const { id } = req.params;
             if (id) {
                 const deletedDoc = await this.dao.mongodb.removeFromBlockList(id);
-                if (deletedDoc) res.status(200).send(deletedDoc);
+                res.status(200).send(deletedDoc);
             }
             else res.status(400).send("Bad request")
         } catch (error) {
