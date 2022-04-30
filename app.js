@@ -31,9 +31,11 @@ server.get("/health-check", (req, res, next) =>
     res.json("Server is now running! 🔥");
 })
 
-server.listen(process.env.PORT || 3000, () =>
+let port = process.env.PORT || 8000;
+
+server.listen(port, () =>
 {
-    console.log("Server is now running! 🔥");
+    console.log(`Server is now running in ${port}! 🔥🔥🔥`);
 })
 
 module.exports = server;
