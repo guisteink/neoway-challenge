@@ -9,7 +9,7 @@ server.use(cors());
 database.connect();
 
 const port = process.env.PORT || 8000;
-// server.use(express.json());
+server.use(express.json());
 
 // server.use(function (req, res, next)
 // {
