@@ -14,8 +14,6 @@ const corsOptions = {
 }
 
 server.use(express.json());
-server.use("/api", routes)
-server.use(cors(corsOptions));
 
 server.use(function (req, res, next)
 {
@@ -25,6 +23,8 @@ server.use(function (req, res, next)
     res.setHeader('Access-Control-Expose-Headers', 'X-Total-Count');
     res.setHeader('X-Total-Count', '10');
 });
+server.use("/api", routes)
+server.use(cors(corsOptions));
 
 server.get("/health-check", (req, res, next) =>
 {
