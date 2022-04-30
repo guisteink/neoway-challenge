@@ -31,7 +31,7 @@ server.get("/health-check", (req, res, next) =>
     res.json("Server is now running! 🔥");
 })
 
-server.listen(3030 || process.env.PORT, () =>
+server.listen(process.env.PORT, () =>
 {
     console.log("Server is now running! 🔥");
 })
