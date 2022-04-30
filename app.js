@@ -8,21 +8,22 @@ const server = express();
 database.connect();
 
 const corsOptions = {
-    // origin: ['http://localhost:3000', 'https://localhost:3000', 'http://localhost:3000', "https://www.4devs.com.br/ferramentas_online.php"],
-    origin: "*",
+    origin: ['http://localhost:3000', 'https://localhost:3000', 'http://localhost:3000', "https://www.4devs.com.br/ferramentas_online.php"],
+    // origin: "*",
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }
 
 server.use(express.json());
 
-server.use(function (req, res, next)
-{
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, x-access-token, X-Total-Count, x-event-id');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS');
-    res.header('Access-Control-Expose-Headers', 'X-Total-Count');
-    res.header('X-Total-Count', '10');
-});
+// server.use(function (req, res, next)
+// {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, x-access-token, X-Total-Count, x-event-id');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS');
+//     res.header('Access-Control-Expose-Headers', 'X-Total-Count');
+//     res.header('X-Total-Count', '10');
+// });
+
 server.use("/api", routes)
 server.use(cors(corsOptions));
 
