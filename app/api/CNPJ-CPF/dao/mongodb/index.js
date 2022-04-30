@@ -43,6 +43,12 @@ class DocRepository
         const deletedDoc = await BlocklistModel.findByIdAndDelete({ _id: id })
         return deletedDoc
     }
+
+    static async getBlockList()
+    {
+        const findAll = await BlocklistModel.find({})
+        return findAll
+    }
 }
 
 module.exports = DocRepository;

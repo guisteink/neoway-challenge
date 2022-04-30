@@ -161,6 +161,24 @@ class DocController
             return res.status(500).send(error)
         }
     }
+
+
+    /**
+     * Deleta o documento do banco da collection blocklist
+     * @param {*} req 
+     * @param {*} res 
+     */
+    async getBlockList(req, res, next)
+    {
+        try {
+            const blockList = await this.dao.mongodb.getBlocklist()
+            return res.status(200).send(blockList)
+        } catch (error) {
+            console.log(error)
+            return res.status(500).send(error)
+        }
+    }
+
 }
 
 module.exports = new DocController();

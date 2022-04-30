@@ -14,5 +14,6 @@ router
 
     .post("/blocklist", (req, res, next) => docController.addToBlockList(req, res, next))
     .delete("/blocklist/:id", (req, res, next) => docController.removeFromBlockList(req, res, next))
+    .get("/blocklist/list/all", (req, res, next) => docController.getBlockList(req, res, next))
 
 module.exports = router;
