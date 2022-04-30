@@ -5,15 +5,11 @@ const database = require('./modules/db-adapters/mongo-db');
 const routes = require('./app/api/CNPJ-CPF/docRoutes');
 
 const server = express();
+server.use(cors());
 database.connect();
 
-const corsOptions = {
-    origin: ['http://localhost:3000', 'https://localhost:3000', 'http://localhost:3000', "https://www.4devs.com.br/ferramentas_online.php"],
-    // origin: "*",
-    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
-}
-
-server.use(express.json());
+const port = process.env.PORT || 8000;
+// server.use(express.json());
 
 // server.use(function (req, res, next)
 // {
@@ -25,14 +21,12 @@ server.use(express.json());
 // });
 
 server.use("/api", routes)
-server.use(cors(corsOptions));
 
 server.get("/health-check", (req, res, next) =>
 {
     return res.send("Server is now running! 🔥");
 })
 
-let port = process.env.PORT || 8000;
 
 server.listen(port, () =>
 {
