@@ -19,6 +19,7 @@ class DocController
         const { type, number } = req.body;
         try {
             const response = await this.validationService.isValidDocument(type, number);
+
             res.status(response.status).send(response.data)
         } catch (error) {
             console.log(error)
