@@ -28,7 +28,7 @@ server.use(function (req, res, next)
 
 server.get("/health-check", (req, res, next) =>
 {
-    res.json("Server is now running! 🔥");
+    return res.send("Server is now running! 🔥");
 })
 
 let port = process.env.PORT || 8000;
