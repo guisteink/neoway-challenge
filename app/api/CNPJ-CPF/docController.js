@@ -114,7 +114,17 @@ class DocController
     async getAll(req, res, next)
     {
         try {
-            const findAll = await this.dao.mongodb.listAll()
+            let query = {};
+            if (req.query.status) query.isValid = req.query.status;
+            if (req.query.date) {
+                let yyyy = parseInt(req.query.date.substring(0, 4))
+                let dd = parseInt(req.query.date.substring(5, 7))
+                let mm = parseInt(req.query.date.substring(8, 10))
+                let dateObj = new Date(yyyy, mm, dd)
+                query.createdAt = { $gte: dateObj };
+            }
+
+            const findAll = await this.dao.mongodb.listAll(query)
             return res.status(200).send(findAll);
         } catch (error) {
             console.log(error)
@@ -171,8 +181,22 @@ class DocController
     async getBlockList(req, res, next)
     {
         try {
-            const listAll = await this.dao.mongodb.getBlockList()
-            return res.status(200).send(listAll)
+
+            let query = {};
+            if (req.query.status) query.isValid = req.query.status;
+            if (req.query.date) {
+                let yyyy = parseInt(req.query.date.substring(0, 4))
+                let dd = parseInt(req.query.date.substring(5, 7))
+                let mm = parseInt(req.query.date.substring(8, 10))
+                let dateObj = new Date(yyyy, mm, dd)
+                query.createdAt = { $gte: dateObj };
+            }
+
+            const findAll = await this.dao.mongodb.getBlockList(query)
+            return res.status(200).send(findAll);
+
+            // const listAll = await this.dao.mongodb.getBlockList()
+            // return res.status(200).send(listAll)
         } catch (error) {
             console.log(error)
             return res.status(500).send(error)

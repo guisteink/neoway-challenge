@@ -26,9 +26,9 @@ class DocRepository
         return findNote
     }
 
-    static async listAll()
+    static async listAll(query)
     {
-        const findAll = await DocModel.find({}).sort({ createdAt: -1 })
+        const findAll = await DocModel.find(query).sort({ createdAt: -1 })
         return findAll
     }
 
