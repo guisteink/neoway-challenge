@@ -114,7 +114,7 @@ class DocController
     async getAll(req, res, next)
     {
         try {
-            const findAll = await this.dao.mongodb.listAll()
+            const findAll = await this.dao.mongodb.getBlockList()
             return res.status(200).send(findAll);
         } catch (error) {
             console.log(error)
