@@ -131,7 +131,7 @@ class DocController
     {
         try {
             const { type, number, isValid } = req.body;
-            if (type && number && isValid) {
+            if (type && number) {
                 const newBlock = await this.dao.mongodb.addToBlockList({ type, number, isValid })
                 return res.status(201).send(newBlock)
             }
