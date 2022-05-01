@@ -34,7 +34,7 @@ class DocController
     {
         try {
             const { type, number, isValid } = req.body;
-            if (type && number && isValid) {
+            if (type && number) {
                 const newDoc = await this.dao.mongodb.insertToDb({ type, number, isValid })
                 return res.status(201).send(newDoc)
             }
