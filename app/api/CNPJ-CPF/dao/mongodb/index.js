@@ -28,7 +28,7 @@ class DocRepository
 
     static async listAll()
     {
-        const findAll = await DocModel.find({})
+        const findAll = await DocModel.find({}).sort({ createdAt: 1 })
         return findAll
     }
 
@@ -46,7 +46,7 @@ class DocRepository
 
     static async getBlockList()
     {
-        const findAll = await BlocklistModel.find({})
+        const findAll = await BlocklistModel.find({}).sort({ createdAt: 1 })
         return findAll
     }
 }
